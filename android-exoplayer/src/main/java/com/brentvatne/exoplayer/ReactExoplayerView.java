@@ -88,6 +88,7 @@ class ReactExoplayerView extends FrameLayout implements
     private boolean isPaused = true;
     private boolean isBuffering;
     private float rate = 1f;
+    private float lastVol = 0;
 
     // Props from React
     private Uri srcUri;
@@ -602,7 +603,7 @@ class ReactExoplayerView extends FrameLayout implements
 
     public void setMutedModifier(boolean muted) {
         if (player != null) {
-            player.setVolume(muted ? 0 : 1);
+            player.setVolume(muted ? 0 : lastVol);
         }
     }
 
@@ -610,6 +611,7 @@ class ReactExoplayerView extends FrameLayout implements
     public void setVolumeModifier(float volume) {
         if (player != null) {
             player.setVolume(volume);
+            lastVol = volume;
         }
     }
 
